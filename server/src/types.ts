@@ -1,17 +1,17 @@
-type MatchId = 'boca-river' | 'argentina-brasil'
+export type MatchId = 'boca-river' | 'argentina-brasil'
 
-interface JoinRoomEvent{
+export interface JoinRoomEvent{
     type: "JOIN_ROOM";
     matchId: MatchId;
     username: string
 }
-interface ChatMessageEvent{
+export interface ChatMessageEvent{
     type: "CHAT_MESSAGE";
     matchId: MatchId;
     message: string;
 }
 
-interface ChatMessage{
+export interface ChatMessage{
     type: "CHAT_MESSAGE"; //dejo lugar a que hayan otros tipos de mensajes
     message: string;
     matchId: MatchId;
@@ -19,4 +19,4 @@ interface ChatMessage{
     timestamp: number;
 }
 
-type ClientEvent = JoinRoomEvent | ChatMessageEvent;
+export type ClientEvent = JoinRoomEvent | ChatMessageEvent;
