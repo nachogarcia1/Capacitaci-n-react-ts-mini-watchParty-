@@ -1,6 +1,7 @@
 
 import WebSocket, { WebSocketServer } from 'ws';
 import {ChatMessage, ChatMessageEvent, JoinRoomEvent, MatchId, ClientEvent} from './types';
+import {randomUUID} from "node:crypto";
 
 
 const PORT = 8080;
@@ -15,8 +16,9 @@ wss.on("connection", (ws) => { //evento a nivel servidor wss -> es el server, ws
 
     ws.on("message", (raw) => {
 
-        const event = JSON.parse(raw.toString()) as ClientEvent;
+        try{
 
+        const event = JSON.parse(raw.toString()) as ClientEvent;
 
         if (!VALID_MATCH_IDS.includes(event.matchId)) {
             console.log(`Sala inválida recibida: ${event.matchId}`);
@@ -36,8 +38,9 @@ wss.on("connection", (ws) => { //evento a nivel servidor wss -> es el server, ws
                 }
                 const message: ChatMessage = { // creo el chatMessage a partir del event obtenido y el senderstate. Hace falta hacer un guard check pq sino el username es undefined. (no se unio nunca a la sala)
                     type: "CHAT_MESSAGE",
+                    id: randomUUID(),
                     message: event.message,
-                    matchId: event.matchId,
+                    matchId: senderState.matchId,
                     sender: senderState.username,
                     timestamp: Date.now(),
                 };
@@ -53,6 +56,11 @@ wss.on("connection", (ws) => { //evento a nivel servidor wss -> es el server, ws
                 });
             }
         }
+        }
+        catch(error){
+            console.error("Error procesando mensaje:", error);
+        }
+
     })
 
 

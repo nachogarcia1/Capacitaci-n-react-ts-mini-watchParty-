@@ -13,10 +13,19 @@ export interface ChatMessageEvent{
 
 export interface ChatMessage{
     type: "CHAT_MESSAGE"; //dejo lugar a que hayan otros tipos de mensajes
+    id: string
     message: string;
     matchId: MatchId;
     sender: string;
     timestamp: number;
 }
+
+export interface UserJoinedMessage {
+    type: "USER_JOINED";
+    matchId: MatchId;
+    username: string;
+}
+
+type SocketMessage = ChatMessage | UserJoinedMessage;
 
 export type ClientEvent = JoinRoomEvent | ChatMessageEvent;

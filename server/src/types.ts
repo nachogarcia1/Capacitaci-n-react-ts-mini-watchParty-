@@ -1,5 +1,6 @@
 export type MatchId = 'boca-river' | 'argentina-brasil'
 
+
 export interface JoinRoomEvent{
     type: "JOIN_ROOM";
     matchId: MatchId;
@@ -13,6 +14,7 @@ export interface ChatMessageEvent{
 
 export interface ChatMessage{
     type: "CHAT_MESSAGE"; //dejo lugar a que hayan otros tipos de mensajes
+    id: string;
     message: string;
     matchId: MatchId;
     sender: string;

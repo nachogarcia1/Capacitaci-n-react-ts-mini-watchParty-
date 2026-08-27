@@ -111,3 +111,17 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+.chat_messages {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  overflow-y: auto;
+  list-style: none; /* para sacar las viñetas de <ul> que mencionamos antes */
+}
+
+.messageInput {
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem;
+}
